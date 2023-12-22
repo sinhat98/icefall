@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - fix-ci
 
   pull_request:
     branches:
@@ -42,6 +43,13 @@ jobs:
           df -h
           echo "pwd: $PWD"
           echo "github.workspace ${{ github.workspace }}"
+
+      - name: 'Login to GitHub Container Registry'
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run the build process with Docker
         uses: addnab/docker-run-action@v3
