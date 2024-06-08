@@ -7,7 +7,9 @@ services:
       - .:/root/workspace
       - /datadrive:/root/datadrive
       - ~/.gitconfig:/root/.gitconfig
-    image: grapheme-phoneme-asr-evaluate
+      - ~/.cusror:/root/.cursor
+      - ~/.cursor-server:/root/.cursor-server
+    image: icefall
     shm_size: 4gb
     ports:
       - "8888:8888"
