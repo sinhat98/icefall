@@ -1,0 +1,22 @@
+services:
+  icefall:
+    build:
+      context: .
+      dockerfile: docker/torch2.3.1-cuda12.1.dockerfile
+    volumes:
+      - .:/root/workspace
+      - /datadrive:/root/datadrive
+      - ~/.gitconfig:/root/.gitconfig
+    image: grapheme-phoneme-asr-evaluate
+    shm_size: 4gb
+    ports:
+      - "8888:8888"
+    platform: linux/amd64
+    stdin_open: true
+    tty: true
+    command: bash
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
